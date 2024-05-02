@@ -13,7 +13,7 @@ public enum ProfileExceptionType implements BaseExceptionType {
     MISMATCH_AGE(HttpStatus.BAD_REQUEST, "U002", "올바르지 않은 연령대 데이터입니다."),
     CONFLICT_NICKNAME(HttpStatus.CONFLICT, "U003", "중복된 닉네임입니다.");
 
-    HttpStatus httpStatus;
-    String errorCode;
-    String message;
+    final HttpStatus httpStatus;
+    final String errorCode;
+    final String message;
 }
