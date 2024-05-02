@@ -1,0 +1,13 @@
+package com.walkingtalking.gunilda;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class GunilDaApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(GunilDaApplication.class, args);
+    }
+
+}
