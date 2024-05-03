@@ -21,7 +21,7 @@ public class SocialSignServiceImpl implements SocialSignService {
 
     @Override
     @Transactional
-    public SocialSignDTO.SignInResponse signin(SocialSignDTO.SignInCommand signInCommand) {
+    public SocialSignDTO.SignInResponse signIn(SocialSignDTO.SignInCommand signInCommand) {
         if (!socialRepository.existsBySocialTypeAndSocialId(signInCommand.socialType(), signInCommand.id())) {
             //등록되지 않은 소셜 정보라면 새로운 사용자를 생성함
             //소셜 로그인 시 아이디, 비밀번호 내용은 필요 없으므로 랜덤 값을 저장함
@@ -30,7 +30,7 @@ public class SocialSignServiceImpl implements SocialSignService {
                     .pw(UUID.randomUUID().toString())
                     .build();
 
-            UserSignDTO.SignUpResponse userSignUpResponse = userSignService.signup(userSignUpRequest.toCommand());
+            UserSignDTO.SignUpResponse userSignUpResponse = userSignService.signUp(userSignUpRequest.toCommand());
 
             //새로운 사용자를 바탕으로 소셜과 연동함
             Social social = Social.of(signInCommand.socialType(), signInCommand.id(), userSignUpResponse.userId());

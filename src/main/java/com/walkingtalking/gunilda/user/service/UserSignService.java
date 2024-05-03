@@ -4,8 +4,8 @@ import com.walkingtalking.gunilda.user.dto.UserSignDTO;
 
 public interface UserSignService {
 
-    UserSignDTO.SignUpResponse signup(UserSignDTO.SignUpCommand signUpCommand);
-    UserSignDTO.SignInResponse signin(UserSignDTO.SignInCommand signInCommand);
-    UserSignDTO.SignOutResponse signout(UserSignDTO.SignOutCommand signOutCommand);
+    UserSignDTO.SignUpResponse signUp(UserSignDTO.SignUpCommand signUpCommand);
+    UserSignDTO.SignInResponse signIn(UserSignDTO.SignInCommand signInCommand);
+    UserSignDTO.SignOutResponse signOut(UserSignDTO.SignOutCommand signOutCommand);
 
 }
