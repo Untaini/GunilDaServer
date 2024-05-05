@@ -6,7 +6,6 @@ import lombok.Builder;
 
 import java.util.Date;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JwtTokenDTO {
 
     @Builder
@@ -15,11 +14,13 @@ public class JwtTokenDTO {
     }
 
     @Builder
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record GeneratingWithRefreshTokenRequest(String refreshToken) {
 
     }
 
     @Builder
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record GeneratingResponse(String accessToken, String refreshToken) {
 
     }
