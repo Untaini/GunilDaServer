@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface RefreshTokenRepositoryWithRedis extends CrudRepository<RefreshToken, String> {
 
-    boolean existsByUserId(Long userId);
     Optional<RefreshToken> findByUserId(Long userId);
 
 }
