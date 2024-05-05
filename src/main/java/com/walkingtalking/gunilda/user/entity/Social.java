@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Social {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long index;
 
     @Column(nullable = false)
