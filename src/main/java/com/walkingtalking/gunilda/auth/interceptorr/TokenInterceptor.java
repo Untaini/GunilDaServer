@@ -1,6 +1,5 @@
 package com.walkingtalking.gunilda.auth.interceptorr;
 
-import ch.qos.logback.classic.encoder.JsonEncoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.walkingtalking.gunilda.auth.dto.JwtTokenDTO;
 import com.walkingtalking.gunilda.auth.exception.AuthException;
