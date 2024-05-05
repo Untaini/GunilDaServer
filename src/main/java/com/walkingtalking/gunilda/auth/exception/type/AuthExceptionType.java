@@ -13,7 +13,7 @@ public enum AuthExceptionType implements BaseExceptionType {
     DUPLICATE_SIGN_IN(HttpStatus.UNAUTHORIZED, "A002", "중복 로그인이 감지되었습니다."),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "A003", "Token이 손상되었습니다.");
 
-    HttpStatus httpStatus;
-    String errorCode;
-    String message;
+    final HttpStatus httpStatus;
+    final String errorCode;
+    final String message;
 }
