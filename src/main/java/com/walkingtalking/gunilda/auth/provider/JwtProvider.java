@@ -32,8 +32,8 @@ public class JwtProvider {
 
     private final RefreshTokenRepositoryWithRedis tokenRepository;
     private final AccessTokenBlackListWithRedis blackListRepository;
-    private SecretKey secretKey;
-    private JwtParser jwtParser;
+    private final SecretKey secretKey;
+    private final JwtParser jwtParser;
 
     @Autowired
     public JwtProvider(@Value("${jwt.secret_key}") String key,
@@ -54,11 +54,8 @@ public class JwtProvider {
 
     @Transactional
     public JwtTokenDTO.GeneratingResponse generateToken(JwtTokenDTO.GeneratingWithRefreshTokenRequest request) {
-        if (!tokenRepository.existsById(request.refreshToken())) {
-            throw new AuthException(AuthExceptionType.EXPIRED_REFRESH_TOKEN);
-        }
-
-        RefreshToken token = tokenRepository.findById(request.refreshToken()).get();
+        RefreshToken token = tokenRepository.findById(request.refreshToken())
+                .orElseThrow(() -> new AuthException(AuthExceptionType.EXPIRED_REFRESH_TOKEN));
 
         return generateToken(token.getUserId());
     }
@@ -90,7 +87,7 @@ public class JwtProvider {
                 .refreshToken(response.refreshToken())
                 .accessToken(response.accessToken())
                 .userId(userId)
-                .ttl(REFRESH_TOKEN_EXPIRATION_TIME)
+                .ttl(REFRESH_TOKEN_EXPIRATION_TIME/1000) //밀리초 -> 초 변환
                 .build();
 
         removePreviousToken(userId);
@@ -118,28 +115,24 @@ public class JwtProvider {
     }
 
     private void removePreviousToken(Long userId) {
-        if (!tokenRepository.existsByUserId(userId)) {
-            return;
-        }
+        tokenRepository.findByUserId(userId).ifPresent(token -> {
+            // 중복 로그인 방지를 위한 코드
+            // refresh token을 명시적으로 삭제한다는 것은 중복 로그인이 되었다는 의미임
+            // 따라서 현재 이용 가능한 access token을 블랙리스트로 만들어 이전에 로그인 했던 사용자의 접근을 차단함
+            try {
+                String accessTokenForBlackList = token.getAccessToken();
+                Long ttlMilli = verify(accessTokenForBlackList).expiration().getTime() - System.currentTimeMillis();
 
-        RefreshToken token = tokenRepository.findByUserId(userId).get();
+                AccessTokenBlackList blackListToken = AccessTokenBlackList.builder()
+                        .accessToken(accessTokenForBlackList)
+                        .ttl(ttlMilli/1000) //블랙리스트 기간을 토큰 만료 기간과 동일하게 잡음
+                        .build();
 
-        // 중복 로그인 방지를 위한 코드
-        // refresh token을 명시적으로 삭제한다는 것은 중복 로그인이 되었다는 의미임
-        // 따라서 현재 이용 가능한 access token을 블랙리스트로 만들어 이전에 로그인 했던 사용자의 접근을 차단함
-        try {
-            String accessTokenForBlackList = token.getAccessToken();
-            Long ttl = verify(accessTokenForBlackList).expiration().getTime() - System.currentTimeMillis();
+                blackListRepository.save(blackListToken);
+            } catch (AuthException ae) {}//access token을 삭제할 필요가 없음.
 
-            AccessTokenBlackList blackListToken = AccessTokenBlackList.builder()
-                    .accessToken(accessTokenForBlackList)
-                    .ttl(ttl) //블랙리스트 기간을 토큰 만료 기간과 동일하게 잡음
-                    .build();
-
-            blackListRepository.save(blackListToken);
-        } catch (AuthException ae) {}//access token을 삭제할 필요가 없음.
-
-        tokenRepository.delete(token);
+            tokenRepository.delete(token);
+        });
     }
 
 }

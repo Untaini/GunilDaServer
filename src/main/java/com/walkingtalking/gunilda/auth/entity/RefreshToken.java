@@ -9,8 +9,6 @@ import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
-import java.util.concurrent.TimeUnit;
-
 @RedisHash
 @Data
 @NoArgsConstructor
@@ -26,7 +24,7 @@ public class RefreshToken {
 
     private String accessToken;
 
-    @TimeToLive(unit = TimeUnit.MILLISECONDS)
+    @TimeToLive
     private Long ttl;
 
 }

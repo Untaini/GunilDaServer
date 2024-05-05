@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 
-import java.util.concurrent.TimeUnit;
-
 @Data
 @RedisHash
 @NoArgsConstructor
@@ -20,7 +18,7 @@ public class AccessTokenBlackList {
     @Id
     private String accessToken;
 
-    @TimeToLive(unit = TimeUnit.MILLISECONDS)
+    @TimeToLive
     private Long ttl;
 
 }
