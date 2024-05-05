@@ -14,23 +14,20 @@ public class UserProfileController {
     private final UserProfileService profileService;
 
     @PostMapping()
-    public ResponseEntity<UserProfileDTO.CreateProfileResponse> createProfile(@RequestBody UserProfileDTO.CreateProfileRequest profileRequest) {
-        Long userId = 0L; //TO-DO
-
+    public ResponseEntity<UserProfileDTO.CreateProfileResponse> createProfile(@RequestBody UserProfileDTO.CreateProfileRequest profileRequest,
+                                                                              @RequestAttribute Long userId) {
         return ResponseEntity.ok(profileService.createProfile(profileRequest.toCommand(userId)));
     }
 
     @PatchMapping("/profile")
-    public ResponseEntity<UserProfileDTO.ChangeProfileResponse> changeProfile(@RequestBody UserProfileDTO.ChangeProfileRequest profileRequest) {
-        Long userId = 0L; //TO-DO
-
+    public ResponseEntity<UserProfileDTO.ChangeProfileResponse> changeProfile(@RequestBody UserProfileDTO.ChangeProfileRequest profileRequest,
+                                                                              @RequestAttribute Long userId) {
         return ResponseEntity.ok(profileService.changeProfile(profileRequest.toCommand(userId)));
     }
 
     @PatchMapping("/nickname")
-    public ResponseEntity<UserProfileDTO.ChangeNicknameResponse> changeNickname(@RequestBody UserProfileDTO.ChangeNicknameRequest nicknameRequest) {
-        Long userId = 0L; //TO-DL
-
+    public ResponseEntity<UserProfileDTO.ChangeNicknameResponse> changeNickname(@RequestBody UserProfileDTO.ChangeNicknameRequest nicknameRequest,
+                                                                                @RequestAttribute Long userId) {
         return ResponseEntity.ok(profileService.changeNickname(nicknameRequest.toCommand(userId)));
     }
 }

@@ -61,6 +61,10 @@ public class JwtProvider {
     }
 
     public JwtTokenDTO.TokenPayload verify(String accessToken) {
+        if (blackListRepository.existsById(accessToken)) {
+            throw new AuthException(AuthExceptionType.DUPLICATE_SIGN_IN);
+        }
+
         try {
             Claims claims = jwtParser.parseSignedClaims(accessToken).getPayload();
 
