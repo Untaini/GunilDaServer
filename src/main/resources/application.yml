@@ -34,7 +34,7 @@ spring:
       on-profile: mysql-dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
 
@@ -44,7 +44,7 @@ spring:
     properties:
       hibernate:
         show_sql: false
-    database-platform: org.hibernate.dialect.Mysql8InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
 
 ---
@@ -54,7 +54,7 @@ spring:
       on-profile: mysql-prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
 
@@ -64,7 +64,7 @@ spring:
     properties:
       hibernate:
         show_sql: false
-    database-platform: org.hibernate.dialect.Mysql8InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
 
 ---
