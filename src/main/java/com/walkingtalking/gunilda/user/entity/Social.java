@@ -16,7 +16,7 @@ public class Social {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long index;
+    private Long idx;
 
     @Column(nullable = false)
     private SocialType socialType;
