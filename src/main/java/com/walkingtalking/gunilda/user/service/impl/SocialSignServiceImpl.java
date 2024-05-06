@@ -43,7 +43,7 @@ public class SocialSignServiceImpl implements SocialSignService {
 
         return SocialSignDTO.SignInResponse.builder()
                 .userId(social.getUserId())
-                .needInitialization(userProfileService.needChangingProfile(social.getUserId()))
+                .needInitialization(userProfileService.needInitializeProfile(social.getUserId()))
                 .build();
     }
 

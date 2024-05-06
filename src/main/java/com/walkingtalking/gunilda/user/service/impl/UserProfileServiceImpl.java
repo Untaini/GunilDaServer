@@ -74,7 +74,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     @Transactional
-    public Boolean needChangingProfile(Long userId) {
+    public Boolean needInitializeProfile(Long userId) {
         User user = profileRepository.findByUserId(userId)
                 .orElseThrow(() -> new ProfileException(ProfileExceptionType.USER_NOT_FOUND));
 

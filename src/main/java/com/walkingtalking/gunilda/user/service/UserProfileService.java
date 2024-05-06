@@ -7,5 +7,5 @@ public interface UserProfileService {
     UserProfileDTO.ChangeProfileResponse changeProfile(UserProfileDTO.ChangeProfileCommand profileCommand);
     UserProfileDTO.ChangeNicknameResponse changeNickname(UserProfileDTO.ChangeNicknameCommand nicknameCommand);
     UserProfileDTO.CreateProfileResponse createProfile(UserProfileDTO.CreateProfileCommand profileCommand);
-    Boolean needChangingProfile(Long userId);
+    Boolean needInitializeProfile(Long userId);
 }
