@@ -1,5 +1,7 @@
 package com.walkingtalking.gunilda.user.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.walkingtalking.gunilda.user.type.SocialType;
 import lombok.Builder;
 
@@ -21,7 +23,8 @@ public class SocialSignDTO {
     }
 
     @Builder
-    public record SignInResponse(Long userId) {
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record SignInResponse(Long userId, Boolean needInitialization) {
 
     }
 }
