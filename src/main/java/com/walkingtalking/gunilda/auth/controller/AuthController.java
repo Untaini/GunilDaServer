@@ -32,13 +32,7 @@ public class AuthController {
 
         JwtTokenDTO.GeneratingResponse jwtResponse = jwtProvider.generateToken(jwtRequest);
 
-        SocialLoginResponseDTO response = SocialLoginResponseDTO.builder()
-                .accessToken(jwtResponse.accessToken())
-                .refreshToken(jwtResponse.refreshToken())
-                .needInitialization(signInResponse.needInitialization())
-                .build();
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(SocialLoginResponseDTO.from(jwtResponse, signInResponse));
     }
 
     @PostMapping("/refresh")
