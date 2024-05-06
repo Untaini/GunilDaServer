@@ -1,6 +1,7 @@
 package com.walkingtalking.gunilda.auth.controller;
 
 import com.walkingtalking.gunilda.auth.dto.JwtTokenDTO;
+import com.walkingtalking.gunilda.auth.dto.SocialLoginResponseDTO;
 import com.walkingtalking.gunilda.auth.provider.JwtProvider;
 import com.walkingtalking.gunilda.user.dto.SocialSignDTO;
 import com.walkingtalking.gunilda.user.service.SocialSignService;
@@ -22,14 +23,22 @@ public class AuthController {
     private final SocialSignService socialSignService;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtTokenDTO.GeneratingResponse> socialLogin(@RequestBody SocialSignDTO.SignInRequest request) {
+    public ResponseEntity<SocialLoginResponseDTO> socialLogin(@RequestBody SocialSignDTO.SignInRequest request) {
         SocialSignDTO.SignInResponse signInResponse = socialSignService.signIn(request.toCommand());
 
         JwtTokenDTO.GeneratingWithIdRequest jwtRequest = JwtTokenDTO.GeneratingWithIdRequest.builder()
                 .userId(signInResponse.userId())
                 .build();
 
-        return ResponseEntity.ok(jwtProvider.generateToken(jwtRequest));
+        JwtTokenDTO.GeneratingResponse jwtResponse = jwtProvider.generateToken(jwtRequest);
+
+        SocialLoginResponseDTO response = SocialLoginResponseDTO.builder()
+                .accessToken(jwtResponse.accessToken())
+                .refreshToken(jwtResponse.refreshToken())
+                .needInitialization(signInResponse.needInitialization())
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/refresh")
