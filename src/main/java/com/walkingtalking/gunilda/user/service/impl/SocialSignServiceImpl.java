@@ -5,6 +5,7 @@ import com.walkingtalking.gunilda.user.dto.UserSignDTO;
 import com.walkingtalking.gunilda.user.entity.Social;
 import com.walkingtalking.gunilda.user.repository.SocialRepository;
 import com.walkingtalking.gunilda.user.service.SocialSignService;
+import com.walkingtalking.gunilda.user.service.UserProfileService;
 import com.walkingtalking.gunilda.user.service.UserSignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class SocialSignServiceImpl implements SocialSignService {
 
     private final SocialRepository socialRepository;
     private final UserSignService userSignService;
+    private final UserProfileService userProfileService;
 
     @Override
     @Transactional
@@ -41,6 +43,7 @@ public class SocialSignServiceImpl implements SocialSignService {
 
         return SocialSignDTO.SignInResponse.builder()
                 .userId(social.getUserId())
+                .needInitialization(userProfileService.needChangingProfile(social.getUserId()))
                 .build();
     }
 

@@ -72,5 +72,13 @@ public class UserProfileServiceImpl implements UserProfileService {
         return UserProfileDTO.CreateProfileResponse.from(profileResponse, nicknameResponse);
     }
 
+    @Override
+    @Transactional
+    public Boolean needChangingProfile(Long userId) {
+        User user = profileRepository.findByUserId(userId)
+                .orElseThrow(() -> new ProfileException(ProfileExceptionType.USER_NOT_FOUND));
+
+        return user.getGender() == GenderType.UNKNOWN;
+    }
 
 }
