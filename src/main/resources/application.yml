@@ -37,6 +37,9 @@ spring:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
 
   jpa:
     hibernate:
@@ -57,6 +60,9 @@ spring:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
 
   jpa:
     hibernate:
