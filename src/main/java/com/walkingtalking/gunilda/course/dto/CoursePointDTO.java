@@ -13,4 +13,12 @@ public record CoursePointDTO(Double latitude, Double longitude) {
                 .longitude(longitude)
                 .build();
     }
+
+    public static CoursePointDTO from(CoursePoint coursePoint) {
+        return CoursePointDTO.builder()
+                .latitude(coursePoint.getLatitude())
+                .longitude(coursePoint.getLongitude())
+                .build();
+    }
+
 }
