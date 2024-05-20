@@ -41,7 +41,7 @@ public class ExerciseSearchServiceImpl implements ExerciseSearchService {
 
             searchId = exercise.getId();
         } else {
-            searchId = 0L;
+            searchId = Long.MAX_VALUE;
         }
 
         if (command.showCount() == null) {
