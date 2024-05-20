@@ -16,7 +16,7 @@ public class CoursePointSaveRepository {
 
     @Transactional
     public void saveAll(List<CoursePoint> points) {
-        String sql = "INSERT INTO COURSE_POINT (course_id, course_order, latitude, longitude)"
+        String sql = "INSERT INTO course_point (course_id, course_order, latitude, longitude)"
                 + "VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.batchUpdate(sql, points, points.size(), (ps, point) -> {
