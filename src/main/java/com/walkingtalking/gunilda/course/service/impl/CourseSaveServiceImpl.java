@@ -5,7 +5,6 @@ import com.walkingtalking.gunilda.course.entity.Course;
 import com.walkingtalking.gunilda.course.entity.CoursePoint;
 import com.walkingtalking.gunilda.course.repository.CoursePointSaveRepository;
 import com.walkingtalking.gunilda.course.repository.CourseRepository;
-import com.walkingtalking.gunilda.course.repository.CoursePointRepository;
 import com.walkingtalking.gunilda.course.service.CourseSaveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -16,8 +16,8 @@ import java.util.List;
 public class PointsBulkSaveTest {
 
     private static final int COUNT = 10_000;
-    private CoursePointRepository pointRepository;
-    private CoursePointSaveRepository pointSaveRepository;
+    private final CoursePointRepository pointRepository;
+    private final CoursePointSaveRepository pointSaveRepository;
 
     @Autowired
     PointsBulkSaveTest(CoursePointRepository pointRepository, JdbcTemplate jdbcTemplate) {
@@ -28,7 +28,7 @@ public class PointsBulkSaveTest {
 
     @Test
     @DisplayName("normal insert")
-    void 일반_insert() {
+    void saveAll_insert() {
         long startTime = System.currentTimeMillis();
         List<CoursePoint> points = new ArrayList<>();
         for (int i = 1; i <= COUNT; i++) {
@@ -48,7 +48,7 @@ public class PointsBulkSaveTest {
 
     @Test
     @DisplayName("bulk insert")
-    void 벌크_insert() {
+    void bulk_insert() {
         long startTime = System.currentTimeMillis();
         List<CoursePoint> points = new ArrayList<>();
         for (int i = 1; i <= COUNT; i++) {
