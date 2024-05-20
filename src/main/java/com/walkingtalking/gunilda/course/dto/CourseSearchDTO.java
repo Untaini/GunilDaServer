@@ -16,17 +16,6 @@ public class CourseSearchDTO {
     }
 
     @Builder
-    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record MyCoursesRequest(Integer showCount, Long nextCourseId) {
-        public SearchExerciseDTO.SearchRecentExerciseRequest toExerciseRequest() {
-            return SearchExerciseDTO.SearchRecentExerciseRequest.builder()
-                    .showCount(showCount)
-                    .nextCourseId(nextCourseId)
-                    .build();
-        }
-    }
-
-    @Builder
     public record MyCoursesResponse(List<MyCourse> courses) {
 
     }
