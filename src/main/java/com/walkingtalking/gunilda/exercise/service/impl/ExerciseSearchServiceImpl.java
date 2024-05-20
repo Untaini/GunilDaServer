@@ -66,6 +66,7 @@ public class ExerciseSearchServiceImpl implements ExerciseSearchService {
 
         List<SearchExerciseDTO.ExerciseForCourse> selectedExercises = exerciseRepository.findAllByIdIsIn(selectedExerciseIds)
                 .stream()
+                .sorted(Comparator.comparing(Exercise::getEndTime).reversed()) //값을 가져오면서 id 순으로 정렬된 결과물을 다시 최신 순으로 정렬함
                 .map(SearchExerciseDTO.ExerciseForCourse::from)
                 .toList();
 
