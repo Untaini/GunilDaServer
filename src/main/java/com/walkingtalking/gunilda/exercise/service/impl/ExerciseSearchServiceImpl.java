@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -59,7 +60,7 @@ public class ExerciseSearchServiceImpl implements ExerciseSearchService {
 
         //추후 성능 개선 필요 가능성 있음
         List<Long> selectedExerciseIds = exerciseIds.stream()
-                .filter(elem -> elem >= searchId)
+                .filter(elem -> elem <= searchId)
                 .limit(command.showCount() + 1)
                 .toList();
 
@@ -94,7 +95,9 @@ public class ExerciseSearchServiceImpl implements ExerciseSearchService {
             }
         }
 
+        //최근 운동이 가장 먼저가 되도록 정렬함
         List<Long> exerciseIds = exerciseRepository.findAllByUserId(userId).stream()
+                .sorted(Comparator.comparing(Exercise::getEndTime).reversed())
                 .map(Exercise::getId)
                 .toList();
 
