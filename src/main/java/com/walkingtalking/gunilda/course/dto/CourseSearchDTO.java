@@ -1,9 +1,6 @@
 package com.walkingtalking.gunilda.course.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.walkingtalking.gunilda.course.entity.Course;
-import com.walkingtalking.gunilda.exercise.dto.SearchExerciseDTO;
 import lombok.Builder;
 
 import java.util.List;
