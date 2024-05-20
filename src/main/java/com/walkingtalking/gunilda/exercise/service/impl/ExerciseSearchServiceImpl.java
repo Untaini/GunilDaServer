@@ -50,7 +50,7 @@ public class ExerciseSearchServiceImpl implements ExerciseSearchService {
         List<Long> exerciseIds = getMyExerciseIds(command.userId());
 
         //운동을 한 번도 저장하지 않은 경우
-        if (exerciseIds.size() == 0) {
+        if (exerciseIds.isEmpty()) {
             return SearchExerciseDTO.SearchRecentExerciseResponse.builder()
                     .results(Collections.emptyList())
                     .hasNext(false)

@@ -1,9 +1,6 @@
 package com.walkingtalking.gunilda.exercise.type;
 
-import com.walkingtalking.gunilda.exercise.entity.Exercises;
-import com.walkingtalking.gunilda.user.type.AgeType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.Collections;

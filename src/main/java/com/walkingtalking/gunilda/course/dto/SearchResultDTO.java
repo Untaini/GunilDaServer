@@ -23,7 +23,7 @@ public class SearchResultDTO {
             List<CombineMyCourse> results = exerciseResponse.results().stream()
                     .map(exercise -> {
                         CourseSearchDTO.MyCourse course = courses.stream()
-                                .filter(elem -> elem.courseId() == exercise.courseId())
+                                .filter(elem -> elem.courseId().equals(exercise.courseId()))
                                 .findFirst()
                                 .get();
 
