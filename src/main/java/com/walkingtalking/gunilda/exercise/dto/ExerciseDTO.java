@@ -9,6 +9,7 @@ import lombok.Builder;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public class ExerciseDTO {
 
@@ -83,7 +84,7 @@ public class ExerciseDTO {
                     .maxSpeed(maxSpeed)
                     .averageSpeed(averageSpeed)
                     .step(step)
-                    .stability(stability)
+                    .stability(Optional.ofNullable(stability).orElse(0.0))
                     .distance(distance)
                     .startTime(startTime)
                     .endTime(endTime)
