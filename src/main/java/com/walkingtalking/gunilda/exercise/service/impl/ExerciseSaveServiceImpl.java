@@ -2,6 +2,8 @@ package com.walkingtalking.gunilda.exercise.service.impl;
 
 import com.walkingtalking.gunilda.exercise.dto.ExerciseDTO;
 import com.walkingtalking.gunilda.exercise.entity.Exercise;
+import com.walkingtalking.gunilda.exercise.exception.ExerciseException;
+import com.walkingtalking.gunilda.exercise.exception.type.ExerciseExceptionType;
 import com.walkingtalking.gunilda.exercise.repository.ExerciseRepository;
 import com.walkingtalking.gunilda.exercise.repository.ExercisesWithRedis;
 import com.walkingtalking.gunilda.exercise.service.ExerciseSaveService;
@@ -19,7 +21,11 @@ public class ExerciseSaveServiceImpl implements ExerciseSaveService {
     public ExerciseDTO.SaveResponse save(ExerciseDTO.SaveCommand command) {
         Exercise exercise = command.toEntity();
 
-        exerciseRepository.save(exercise);
+        try {
+            exerciseRepository.save(exercise);
+        } catch(Exception e) {
+            throw new ExerciseException(ExerciseExceptionType.EXERCISE_CANNOT_SAVE);
+        }
 
         exercisesCacheRepository.deleteById(command.userId());
 
