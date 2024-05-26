@@ -39,7 +39,7 @@ public class GoalDTO {
 
         public static Response of(UserTier tier, ExerciseStatus status, ExerciseGoal goal) {
             Date today = Date.valueOf(LocalDate.now());
-            Boolean todayTierUp = tier.getLatestExpUpDate().equals(today);
+            Boolean todayTierUp = tier.getExp() == 0 && tier.getLatestExpUpDate().equals(today);
 
             Double speedFloor = Math.floor(status.getSpeed() * 10) / 10.0;
 
