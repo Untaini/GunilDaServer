@@ -6,6 +6,7 @@ spring:
       dev: mysql-dev, redis-host
       prod: mysql-prod, redis-host
       test: h2, redis-local
+  time-zone: ${TIME_ZONE}
 
 ---
 spring:
@@ -35,7 +36,7 @@ spring:
       on-profile: mysql-dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=${TIME_ZONE}&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
     hikari:
@@ -58,7 +59,7 @@ spring:
       on-profile: mysql-prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=${TIME_ZONE}&characterEncoding=UTF-8
     username: ${DATABASE_ID}
     password: ${DATABASE_PW}
     hikari:
