@@ -1,6 +1,7 @@
 package com.walkingtalking.gunilda.user.type;
 
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +12,11 @@ public enum TierType {
     INTERMEDIATE,
     ADVANCED,
     EXPERT;
+
+    @JsonValue
+    public Integer getValue() {
+        return this.ordinal();
+    }
 
     public Boolean isHighestTier() {
         return this.equals(EXPERT);
