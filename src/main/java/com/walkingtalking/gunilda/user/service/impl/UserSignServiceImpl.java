@@ -2,7 +2,9 @@ package com.walkingtalking.gunilda.user.service.impl;
 
 import com.walkingtalking.gunilda.user.dto.UserSignDTO;
 import com.walkingtalking.gunilda.user.entity.User;
+import com.walkingtalking.gunilda.user.entity.UserTier;
 import com.walkingtalking.gunilda.user.repository.UserRepository;
+import com.walkingtalking.gunilda.user.repository.UserTierRepository;
 import com.walkingtalking.gunilda.user.service.UserSignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserSignServiceImpl implements UserSignService {
 
     private final UserRepository userRepository;
+    private final UserTierRepository tierRepository;
 
     @Override
     @Transactional
@@ -27,6 +30,11 @@ public class UserSignServiceImpl implements UserSignService {
         user.setNickname("guest" + user.getUserId());
 
         userRepository.save(user);
+
+        //User 회원가입 시 새로운 Tier 정보도 저장함
+        UserTier newTier = UserTier.from(user.getUserId());
+
+        tierRepository.save(newTier);
 
         return UserSignDTO.SignUpResponse.builder()
                 .userId(user.getUserId())

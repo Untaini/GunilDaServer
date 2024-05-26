@@ -21,6 +21,7 @@ public class ExerciseDTO {
                               Double minSpeed,
                               Double maxSpeed,
                               Double averageSpeed,
+                              Integer dataCount,
                               Integer step,
                               Double stability,
                               Integer distance,
@@ -49,6 +50,7 @@ public class ExerciseDTO {
                     .minSpeed(minSpeed)
                     .maxSpeed(maxSpeed)
                     .averageSpeed(averageSpeed)
+                    .dataCount(dataCount)
                     .step(step)
                     .stability(stability)
                     .distance(distance)
@@ -67,6 +69,7 @@ public class ExerciseDTO {
                               Double minSpeed,
                               Double maxSpeed,
                               Double averageSpeed,
+                              Integer dataCount,
                               Integer step,
                               Double stability,
                               Integer distance,
@@ -83,6 +86,7 @@ public class ExerciseDTO {
                     .minSpeed(minSpeed)
                     .maxSpeed(maxSpeed)
                     .averageSpeed(averageSpeed)
+                    .dataCount(dataCount)
                     .step(step)
                     .stability(Optional.ofNullable(stability).orElse(0.0))
                     .distance(distance)
