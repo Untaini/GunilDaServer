@@ -60,7 +60,10 @@ public class ExerciseStatusUpdateServiceImpl implements ExerciseStatusUpdateServ
             currentStatus.updateStatus(command.status());
 
             statusRepository.save(currentStatus);
-        } else {
+        }
+
+        //업데이트 직후에 목표를 달성했을 떄에도 실행이 되도록 변경
+        if (currentStatus.isGoalAchieve(goal)) {
             //같은 날짜인 경우에는 exp가 오르지 않음
             tier.expUp(today);
 
