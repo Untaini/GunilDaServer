@@ -14,6 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 
 @Service
 @RequiredArgsConstructor
@@ -35,8 +38,11 @@ public class UserGoalServiceImpl implements UserGoalService {
                 .tier(tier.getTier())
                 .build();
 
+        Date today = Date.valueOf(LocalDate.now());
+
         ExerciseGoal goal = goalRepository.getReferenceById(goalPK);
-        ExerciseStatus status = statusRepository.getReferenceById(command.userId());
+        ExerciseStatus status = statusRepository.findByUserIdAndDate(command.userId(), today)
+                .orElse(ExerciseStatus.emptyStatus(command.userId(), today));
 
         return GoalDTO.Response.of(tier, status, goal);
     }
