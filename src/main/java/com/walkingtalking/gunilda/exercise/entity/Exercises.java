@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RedisHash
@@ -23,7 +24,7 @@ public class Exercises {
 
     private ExerciseCollectType collectType;
 
-    private List<Long> exerciseIds;
+    private List<Long> exerciseIds = new ArrayList<>();
 
     @TimeToLive
     private Long ttl;
