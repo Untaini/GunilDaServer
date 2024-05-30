@@ -3,6 +3,8 @@ package com.walkingtalking.gunilda.exercise.service.impl;
 import com.walkingtalking.gunilda.exercise.dto.StatusUpdateDTO;
 import com.walkingtalking.gunilda.exercise.entity.ExerciseGoal;
 import com.walkingtalking.gunilda.exercise.entity.ExerciseStatus;
+import com.walkingtalking.gunilda.exercise.exception.ExerciseException;
+import com.walkingtalking.gunilda.exercise.exception.type.ExerciseExceptionType;
 import com.walkingtalking.gunilda.exercise.repository.ExerciseGoalRepository;
 import com.walkingtalking.gunilda.exercise.repository.ExerciseStatusRepository;
 import com.walkingtalking.gunilda.exercise.service.ExerciseStatusUpdateService;
@@ -57,9 +59,15 @@ public class ExerciseStatusUpdateServiceImpl implements ExerciseStatusUpdateServ
 
         //만약 오늘의 목표를 달성하지 못 했다면 status를 업데이트 함
         if (!currentStatus.isGoalAchieve(goal)) {
-            currentStatus.updateStatus(command.status());
+            try {
+                currentStatus.updateStatus(command.status());
 
-            statusRepository.save(currentStatus);
+                statusRepository.save(currentStatus);
+
+            } catch (Exception e) {
+                //status를 제대로 업데이트를 할 수 없다면 request 필드가 잘못된 것임
+                throw new ExerciseException(ExerciseExceptionType.EXERCISE_CANNOT_SAVE);
+            }
         }
 
         //업데이트 직후에 목표를 달성했을 떄에도 실행이 되도록 변경
