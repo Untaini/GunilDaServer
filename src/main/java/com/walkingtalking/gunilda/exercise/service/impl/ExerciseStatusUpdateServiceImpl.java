@@ -59,15 +59,9 @@ public class ExerciseStatusUpdateServiceImpl implements ExerciseStatusUpdateServ
 
         //만약 오늘의 목표를 달성하지 못 했다면 status를 업데이트 함
         if (!currentStatus.isGoalAchieve(goal)) {
-            try {
-                currentStatus.updateStatus(command.status());
+            currentStatus.updateStatus(command.status());
 
-                statusRepository.save(currentStatus);
-
-            } catch (Exception e) {
-                //status를 제대로 업데이트를 할 수 없다면 request 필드가 잘못된 것임
-                throw new ExerciseException(ExerciseExceptionType.EXERCISE_CANNOT_SAVE);
-            }
+            statusRepository.save(currentStatus);
         }
 
         //업데이트 직후에 목표를 달성했을 떄에도 실행이 되도록 변경
