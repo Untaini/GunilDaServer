@@ -46,7 +46,7 @@ public class Exercise {
     @Column(nullable = false)
     private Double averageSpeed;
 
-    @Transient
+    @Column(nullable = false)
     private Integer dataCount;
 
 
