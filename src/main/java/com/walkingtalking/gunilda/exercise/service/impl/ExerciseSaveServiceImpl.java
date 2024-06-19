@@ -27,6 +27,9 @@ public class ExerciseSaveServiceImpl implements ExerciseSaveService {
     public ExerciseDTO.SaveResponse save(ExerciseDTO.SaveCommand command) {
         Exercise exercise = command.toEntity();
 
+        //save에 성공하든 실패하든 항상 삭제하도록 변경
+        exercisesCacheRepository.deleteById(command.userId());
+
         try {
             exerciseRepository.save(exercise);
         } catch(Exception e) {
@@ -39,8 +42,6 @@ public class ExerciseSaveServiceImpl implements ExerciseSaveService {
                 .build();
 
         statusUpdateService.updateStatus(updateCommand);
-
-        exercisesCacheRepository.deleteById(command.userId());
 
         return ExerciseDTO.SaveResponse.builder()
                 .build();

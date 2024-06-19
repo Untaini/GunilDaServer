@@ -58,8 +58,11 @@ public class ExerciseStatus {
 
         this.numberOfExercise += status.dataCount();
 
-        this.stride = sumOfStride / this.numberOfExercise;
-        this.speed = sumOfSpeed / this.numberOfExercise;
+        //운동한 데이터의 개수가 없다면 stride와 speed는 업데이트하지 않음
+        if (this.numberOfExercise != 0) {
+            this.stride = sumOfStride / this.numberOfExercise;
+            this.speed = sumOfSpeed / this.numberOfExercise;
+        }
         this.step += status.step();
     }
 

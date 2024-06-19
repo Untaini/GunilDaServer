@@ -3,6 +3,8 @@ package com.walkingtalking.gunilda.exercise.service.impl;
 import com.walkingtalking.gunilda.exercise.dto.StatusUpdateDTO;
 import com.walkingtalking.gunilda.exercise.entity.ExerciseGoal;
 import com.walkingtalking.gunilda.exercise.entity.ExerciseStatus;
+import com.walkingtalking.gunilda.exercise.exception.ExerciseException;
+import com.walkingtalking.gunilda.exercise.exception.type.ExerciseExceptionType;
 import com.walkingtalking.gunilda.exercise.repository.ExerciseGoalRepository;
 import com.walkingtalking.gunilda.exercise.repository.ExerciseStatusRepository;
 import com.walkingtalking.gunilda.exercise.service.ExerciseStatusUpdateService;
